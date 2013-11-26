@@ -8,10 +8,18 @@ describe Game do
       citizen2 = Citizen.create(name: "Tara", age: 13, sex: "F", district_id: 1)
       citizen1 = Citizen.create(name: "Remus", age: 12, sex: "M", district_id: 1)
       citizen2 = Citizen.create(name: "Thor", age: 16, sex: "F", district_id: 1)
+      citizen1 = Citizen.create(name: "Rover", age: 17, sex: "M", district_id: 1)
+      citizen2 = Citizen.create(name: "Grover", age: 13, sex: "F", district_id: 1)
+      citizen1 = Citizen.create(name: "Dumont", age: 12, sex: "M", district_id: 1)
+      citizen2 = Citizen.create(name: "Liann", age: 16, sex: "F", district_id: 1)
       citizen1 = Citizen.create(name: "Rumer", age: 17, sex: "M", district_id: 2)
       citizen2 = Citizen.create(name: "Zola", age: 13, sex: "F", district_id: 2)
       citizen1 = Citizen.create(name: "Sage", age: 12, sex: "M", district_id: 2)
       citizen2 = Citizen.create(name: "Wash", age: 16, sex: "F", district_id: 2)
+      citizen1 = Citizen.create(name: "Monty", age: 17, sex: "M", district_id: 3)
+      citizen3 = Citizen.create(name: "Ordon", age: 13, sex: "F", district_id: 3)
+      citizen1 = Citizen.create(name: "Noodle", age: 13, sex: "M", district_id: 3)
+      citizen3 = Citizen.create(name: "Triash", age: 16, sex: "F", district_id: 3)
     end
     describe '::new' do
       it 'creates a game without a problem' do
@@ -21,20 +29,21 @@ describe Game do
         expect(game.number).to eq(1)
       end
       it 'has citizens' do
-        expect((Citizen.all).count).to eq(8)
+        expect((Citizen.all).count).to eq(16)
       end
 
       describe '#reap' do
         context 'the reaping' do
           it 'selects a tribute' do
             game.reap
-            expect((Tribute.all).count).to eq(4)
+            expect((Tribute.all).count).to eq(6)
           end
           it 'selects two tribute from each district' do
             # I did .first and because that works, i assume .random works, too.
             game.reap
             expect(Tribute.where(district_id: 1).count).to eq(2)
             expect(Tribute.where(district_id: 2).count).to eq(2)
+            expect(Tribute.where(district_id: 3).count).to eq(2)
           end
         end
       end
