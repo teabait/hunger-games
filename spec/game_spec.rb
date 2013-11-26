@@ -28,13 +28,13 @@ describe Game do
         context 'the reaping' do
           it 'selects a tribute' do
             game.reap
-            expect((Tribute.all).count).to eq(2)
+            expect((Tribute.all).count).to eq(4)
           end
-          it 'selects one tribute from each district' do
+          it 'selects two tribute from each district' do
             # I did .first and because that works, i assume .random works, too.
             game.reap
-            expect(Tribute.where(district_id: 1).count).to eq(1)
-            expect(Tribute.where(district_id: 2).count).to eq(1)
+            expect(Tribute.where(district_id: 1).count).to eq(2)
+            expect(Tribute.where(district_id: 2).count).to eq(2)
           end
         end
       end
