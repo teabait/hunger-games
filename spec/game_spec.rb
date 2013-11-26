@@ -51,6 +51,15 @@ describe Game do
             game.reap
             expect(Tribute.where(district_id: 4).count).to eq(0)
           end
+          it 'selects tributes by sex' do
+            females = []
+            Tribute.all.each do |trib|
+              if trib.citizen.sex == "F"
+                females << trib
+              end
+            end
+            expect(females.count).to eq(0)
+          end
         end
       end
     end
