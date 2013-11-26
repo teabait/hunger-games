@@ -1,10 +1,12 @@
 class Game < ActiveRecord::Base
+
   def reap
     i = 1
+    # 5 in this case is the number of districts in my test data.
     while i < 5
       2.times do
-        # i swear the sex M worked before but now it didn't and i am tired
-        tribute = Citizen.where(district_id: i).sample
+        tribute = Citizen.where(district_id: i, sex: "M").sample
+        # reaping only citizens 12-18
         unless tribute.age > 18 || tribute.age < 12
           Tribute.create(citizen_id: tribute.id, district_id: tribute.district_id)
         end
@@ -12,4 +14,5 @@ class Game < ActiveRecord::Base
       i += 1
     end
   end
+
 end
